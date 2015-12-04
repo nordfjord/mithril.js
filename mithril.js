@@ -729,15 +729,16 @@ void (function (global, factory) { // eslint-disable-line
 	var unloaders = []
 
 	function updateLists(views, controllers, view, controller) {
-		if (controller.onunload != null) {
-			unloaders.push({
-				controller: controller,
-				handler: controller.onunload
-			})
-		}
+		// if (controller.onunload != null) {
+		// 	unloaders.push({
+		// 		controller: controller,
+		// 		handler: controller.onunload
+		// 	})
+		// }
 
 		views.push(view)
-		controllers.push(controller)
+		var idx = controllers.push(controller) - 1
+		unloaders[idx] = {controller: controller, handler: controller.onunload || noop};
 	}
 
 	var forcing = false
