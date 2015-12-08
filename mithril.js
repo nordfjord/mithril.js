@@ -1303,6 +1303,7 @@ void (function (global, factory) { // eslint-disable-line
 		forEach(unloaders, function (unloader) {
 			unloader.handler.call(unloader.controller, ev)
 			unloader.controller.onunload = null
+			controllers.splice(controllers.indexOf(unloader.controller), 1)
 		})
 
 		if (isPrevented) {
